@@ -1,0 +1,25 @@
+name: Test Tip Now
+on: { workflow_dispatch: {} }
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - run: python -m pip install httpx
+      - name: Post tip immediately
+        working-directory: tipbot
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          python - << 'PY'
+          import os, httpx
+          from tips import grab_tip
+          tip = grab_tip()
+          msg = f"**Stardew Tip of the Day**\n> {tip}"
+          httpx.post(os.environ["DISCORD_WEBHOOK_URL"],
+                     json={"content": msg[:1999], "username": "Stardew Tip Bot"}).raise_for_status()
+          print("Posted test tip.")
+          PY
