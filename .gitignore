@@ -1,0 +1,18 @@
+# Virtual env / IDE / caches / secrets
+.venv/
+.env
+.idea/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+*.log
+dist/
+build/
+.eggs/
+*.egg-info/
+.pytest_cache/
+http_cache/
+.DS_Store
+Thumbs.db
