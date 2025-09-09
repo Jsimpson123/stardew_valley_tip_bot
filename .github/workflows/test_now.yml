@@ -16,8 +16,8 @@ jobs:
         run: |
           python - << 'PY'
           import os, httpx
-          from tips import grab_tip
-          tip = grab_tip()
+          from tips import generate_tip
+          tip = generate_tip()
           msg = f"**Stardew Tip of the Day**\n> {tip}"
           httpx.post(os.environ["DISCORD_WEBHOOK_URL"],
                      json={"content": msg[:1999], "username": "Stardew Tip Bot"}).raise_for_status()

@@ -30,8 +30,8 @@ jobs:
               sys.exit(0)
 
           import httpx
-          from tips import grab_tip
-          tip = grab_tip()
+          from tips import generate_tip
+          tip = generate_tip()
           msg = f"**Stardew Tip of the Day**\n> {tip}"
 
           r = httpx.post(
